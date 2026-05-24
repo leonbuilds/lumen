@@ -36,7 +36,7 @@ export async function generateMetadata({
   return {
     title: t("title"),
     description: t("description"),
-    metadataBase: new URL("https://lumen-leon.vercel.app"),
+    metadataBase: new URL("https://lumen-gamma-nine.vercel.app"),
     openGraph: {
       title: t("title"),
       description: t("description"),

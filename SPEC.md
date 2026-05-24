@@ -98,7 +98,7 @@
   - **图标**：`lucide-react`
   - **字体**：Inter（正文）+ Geist Mono（等宽）via `next/font`
 - **i18n**：中英双语，默认中文，URL 反映语言（`/` / `/en`）；英文文案由 AI 翻译，Leon 校对
-- **部署**：Vercel，先用默认子域名（如 `lumen-leon.vercel.app`），后续切换正式域名
+- **部署**：Vercel，当前子域名 `lumen-gamma-nine.vercel.app`，后续切换正式域名
 - **数据观测**：Vercel Analytics
 - **性能**：FCP < 1.5s，Lighthouse 性能分 ≥ 90
 - **SEO**：完整 meta tags、sitemap.xml、robots.txt、双语 hreflang
