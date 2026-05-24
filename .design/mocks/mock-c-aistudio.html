@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Leon · AI Engineering & Teaching — AI Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0a0f; --bg-elev:#13131a; --bg-card:#16161f;
+    --border:#252533; --border-soft:#1d1d27;
+    --text:#f4f4f7; --text-dim:#a0a0b0; --text-faint:#6a6a78;
+    --p:#a855f7; --b:#3b82f6; --pk:#ec4899;
+    --grad: linear-gradient(135deg,#a855f7 0%,#3b82f6 50%,#ec4899 100%);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--bg);color:var(--text);font-family:'Inter',-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif;font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  .mono{font-family:'Geist Mono','JetBrains Mono',monospace}
+  a{color:var(--text);text-decoration:none;transition:color .15s,opacity .15s}
+  a:hover{opacity:.8}
+  ::selection{background:rgba(168,85,247,.35)}
+
+  .wrap{max-width:1100px;margin:0 auto;padding:0 32px}
+
+  /* NAV */
+  nav{position:sticky;top:0;background:rgba(10,10,15,.7);backdrop-filter:blur(16px) saturate(180%);border-bottom:1px solid var(--border-soft);z-index:20}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;padding:18px 32px}
+  nav .logo{font-weight:600;font-size:16px;display:flex;align-items:center;gap:10px}
+  nav .logo .orb{width:22px;height:22px;border-radius:50%;background:var(--grad);box-shadow:0 0 24px rgba(168,85,247,.5)}
+  nav .links{display:flex;gap:28px;font-size:14px}
+  nav .links a{color:var(--text-dim)}
+  nav .links a:hover{color:var(--text);opacity:1}
+  nav .right{display:flex;align-items:center;gap:14px}
+  nav .lang{font-size:12px;color:var(--text-dim);padding:6px 12px;border:1px solid var(--border);border-radius:999px}
+  nav .cta-mini{padding:8px 16px;border-radius:999px;background:var(--grad);color:#fff;font-size:13px;font-weight:500;border:none}
+  nav .cta-mini:hover{opacity:.9}
+
+  /* HERO */
+  .hero{position:relative;padding:120px 0 100px;overflow:hidden}
+  .aurora{position:absolute;inset:-100px -10% auto -10%;height:520px;pointer-events:none;z-index:0;
+    background:
+      radial-gradient(60% 60% at 20% 30%, rgba(168,85,247,.35), transparent 60%),
+      radial-gradient(50% 60% at 70% 40%, rgba(59,130,246,.32), transparent 60%),
+      radial-gradient(45% 50% at 50% 70%, rgba(236,72,153,.28), transparent 60%);
+    filter:blur(40px);
+    animation:drift 18s ease-in-out infinite alternate;
+  }
+  @keyframes drift{from{transform:translate(0,0)}to{transform:translate(-30px,20px) scale(1.05)}}
+  .grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:64px 64px;mask-image:radial-gradient(circle at 50% 30%,#000 0,transparent 70%);pointer-events:none;z-index:0}
+  .hero-inner{position:relative;z-index:1;text-align:center;max-width:880px;margin:0 auto}
+  .pill{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:999px;border:1px solid var(--border);background:rgba(255,255,255,.02);font-size:12px;color:var(--text-dim);margin-bottom:28px}
+  .pill .dot{width:6px;height:6px;border-radius:50%;background:#22c55e;box-shadow:0 0 8px #22c55e}
+  .hero h1{font-size:64px;line-height:1.05;letter-spacing:-.035em;font-weight:600;margin-bottom:24px}
+  .hero h1 .grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero .lede{font-size:20px;line-height:1.55;color:var(--text-dim);max-width:640px;margin:0 auto 40px}
+  .hero .cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:48px}
+  .btn-primary{padding:14px 28px;border-radius:999px;background:var(--grad);color:#fff;font-weight:500;font-size:15px;border:none;cursor:pointer;box-shadow:0 8px 32px -8px rgba(168,85,247,.5);transition:transform .15s,box-shadow .15s}
+  .btn-primary:hover{transform:translateY(-1px);box-shadow:0 12px 36px -8px rgba(168,85,247,.7);opacity:1}
+  .btn-ghost{padding:14px 24px;border-radius:999px;border:1px solid var(--border);color:var(--text);font-size:15px;background:transparent}
+  .btn-ghost:hover{border-color:var(--text-dim);background:rgba(255,255,255,.03);opacity:1}
+  .stats{display:flex;justify-content:center;gap:48px;flex-wrap:wrap;margin-top:24px}
+  .stat{text-align:center}
+  .stat .n{font-size:28px;font-weight:600;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .stat .l{font-size:12px;color:var(--text-faint);letter-spacing:.06em;text-transform:uppercase;margin-top:4px}
+
+  /* SECTION */
+  section{padding:96px 0;position:relative}
+  .section-label{display:inline-flex;align-items:center;gap:8px;padding:4px 12px;border-radius:999px;background:rgba(168,85,247,.1);border:1px solid rgba(168,85,247,.25);font-size:12px;color:#c4a8f0;letter-spacing:.06em;text-transform:uppercase;margin-bottom:18px}
+  h2{font-size:42px;letter-spacing:-.025em;font-weight:600;line-height:1.15;margin-bottom:18px;max-width:720px}
+  h2 .grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .section-lede{font-size:17px;color:var(--text-dim);max-width:620px;margin-bottom:48px}
+
+  /* ABOUT */
+  .role-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:48px}
+  .role-card{padding:28px;border-radius:16px;background:var(--bg-card);border:1px solid var(--border);position:relative;overflow:hidden}
+  .role-card::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:var(--grad);opacity:.6}
+  .role-card .idx{font-family:'Geist Mono',monospace;font-size:11px;color:var(--text-faint);margin-bottom:14px}
+  .role-card h3{font-size:18px;font-weight:600;margin-bottom:8px}
+  .role-card p{font-size:13px;color:var(--text-dim);line-height:1.6}
+  .timeline{border-top:1px solid var(--border-soft);padding-top:32px}
+  .tl-row{display:grid;grid-template-columns:140px 1fr;gap:24px;padding:18px 0;border-bottom:1px solid var(--border-soft);align-items:center}
+  .tl-row:last-child{border-bottom:none}
+  .tl-yr{color:var(--text-faint);font-family:'Geist Mono',monospace;font-size:13px}
+  .tl-what{font-size:15px;color:var(--text)}
+  .tl-what b{font-weight:600;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .tl-what span{display:block;color:var(--text-dim);font-size:13px;margin-top:3px}
+
+  /* PROJECTS */
+  .proj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+  .proj{border-radius:18px;background:var(--bg-card);border:1px solid var(--border);overflow:hidden;transition:transform .2s,border-color .2s;position:relative}
+  .proj:hover{transform:translateY(-2px);border-color:rgba(168,85,247,.4)}
+  .proj-img{aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.75);font-family:'Geist Mono',monospace;font-size:13px;letter-spacing:.05em;position:relative;overflow:hidden}
+  .proj-img::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.15),transparent 60%)}
+  .proj-img.energy{background:linear-gradient(135deg,#1a3d2a,#0a2818)}
+  .proj-img.landr{background:linear-gradient(135deg,#1e2a5a,#0f1a3a)}
+  .proj-img.clip{background:linear-gradient(135deg,#3d1a3d,#28102a)}
+  .proj-img.speak{background:linear-gradient(135deg,#3d2a1a,#281a0a)}
+  .proj-body{padding:24px}
+  .proj-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+  .proj-name{font-size:20px;font-weight:600}
+  .proj-vis{font-size:11px;color:var(--text-faint);padding:3px 10px;border-radius:999px;border:1px solid var(--border);letter-spacing:.06em;text-transform:uppercase}
+  .proj-vis.private{color:#f0b84a;border-color:rgba(240,184,74,.3)}
+  .proj-desc{color:var(--text-dim);font-size:14px;line-height:1.6;margin-bottom:16px}
+  .proj-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+  .proj-tags span{font-size:11px;padding:3px 10px;border-radius:999px;background:rgba(255,255,255,.04);color:var(--text-dim);font-family:'Geist Mono',monospace}
+  .proj-link{font-size:13px;color:#a8b5ff;display:inline-flex;align-items:center;gap:4px}
+  .proj-link:hover{color:#c4ceff;opacity:1}
+  .proj-meta-private{font-size:13px;color:var(--text-faint)}
+
+  /* WRITING */
+  .write-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+  .write{padding:24px;border-radius:14px;background:var(--bg-card);border:1px solid var(--border);transition:border-color .15s}
+  .write:hover{border-color:rgba(168,85,247,.4)}
+  .write .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;font-size:12px;color:var(--text-faint)}
+  .write .src{padding:3px 10px;border-radius:999px;background:rgba(168,85,247,.1);color:#c4a8f0;border:1px solid rgba(168,85,247,.2);font-size:11px;letter-spacing:.05em}
+  .write h3{font-size:16px;font-weight:500;line-height:1.45;color:var(--text);margin-bottom:0}
+
+  /* CONTACT */
+  .contact-cta{padding:64px;border-radius:24px;background:linear-gradient(135deg,rgba(168,85,247,.12) 0%,rgba(59,130,246,.1) 50%,rgba(236,72,153,.12) 100%);border:1px solid rgba(168,85,247,.25);text-align:center;position:relative;overflow:hidden}
+  .contact-cta::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(168,85,247,.18),transparent 60%);pointer-events:none}
+  .contact-cta h2{margin:0 auto 16px;text-align:center}
+  .contact-cta p{font-size:17px;color:var(--text-dim);max-width:480px;margin:0 auto 32px}
+  .contact-links{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;position:relative;z-index:1}
+  .contact-link{padding:12px 22px;border-radius:999px;background:rgba(0,0,0,.3);border:1px solid var(--border);color:var(--text);font-size:14px;display:inline-flex;gap:8px;align-items:center}
+  .contact-link.primary{background:var(--grad);border:none;color:#fff;font-weight:500}
+  .contact-link:hover{transform:translateY(-1px);opacity:1}
+
+  footer{padding:40px 0;border-top:1px solid var(--border-soft);text-align:center;color:var(--text-faint);font-size:13px}
+  footer a{color:var(--text-dim)}
+
+  @media (max-width:780px){
+    .hero{padding:80px 0 60px}
+    .hero h1{font-size:40px}
+    .hero .lede{font-size:17px}
+    h2{font-size:30px}
+    .role-grid{grid-template-columns:1fr}
+    .proj-grid,.write-grid{grid-template-columns:1fr}
+    .contact-cta{padding:40px 24px}
+    nav .links{display:none}
+    .tl-row{grid-template-columns:90px 1fr;gap:12px}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="logo"><span class="orb"></span> lumen</div>
+    <div class="links">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#writing">Writing</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="right">
+      <span class="lang">中 / EN</span>
+      <a href="#contact" class="cta-mini">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="aurora"></div>
+  <div class="grid-bg"></div>
+  <div class="wrap">
+    <div class="hero-inner">
+      <div class="pill"><span class="dot"></span> Available for collaboration · 接受咨询合作</div>
+      <h1>用工程化思维，<br>让 <span class="grad">AI 真正可复用</span>。</h1>
+      <p class="lede">Leon · AI Engineering Practitioner &amp; Course Builder.<br>10 年 Java 后端为底，把 AI 协作从 demo 变成方法论。</p>
+      <div class="cta-row">
+        <a href="#contact" class="btn-primary">联系我 →</a>
+        <a href="#projects" class="btn-ghost">看作品集</a>
+      </div>
+      <div class="stats">
+        <div class="stat"><div class="n">10+</div><div class="l">Years Backend</div></div>
+        <div class="stat"><div class="n">4</div><div class="l">Shipped Products</div></div>
+        <div class="stat"><div class="n">2</div><div class="l">Active Cohorts</div></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-label">About</div>
+    <h2>三重身份，<span class="grad">一条主线</span>。</h2>
+    <p class="section-lede">把工程化方法迁到 AI 上——不是写 prompt 玩 demo，而是把"采访、设计、实现、复盘"做成可复用的方法。</p>
+    <div class="role-grid">
+      <div class="role-card">
+        <div class="idx">[ 01 / now ]</div>
+        <h3>AI 工程化 + 教育</h3>
+        <p>Claude Code · Agentic Coding · MCP · Claude API。课程产品：AiCoding 实战课 v2.0、AI 创变者训练营。</p>
+      </div>
+      <div class="role-card">
+        <div class="idx">[ 02 / backing ]</div>
+        <h3>10 yrs Java 后端</h3>
+        <p>Spring Cloud / Kafka / Redis 源码级；高并发、分布式、微服务；JVM 调优；4 年带 6 人团队。</p>
+      </div>
+      <div class="role-card">
+        <div class="idx">[ 03 / writing ]</div>
+        <h3>公众号「AI 工作台」</h3>
+        <p>每日 AI 资讯自动化 + 手动创作；小红书工具与工作流分享；用开发者听得懂的语言讲清楚。</p>
+      </div>
+    </div>
+    <div class="timeline">
+      <div class="tl-row"><div class="tl-yr">2020 — 2022</div><div class="tl-what"><b>滴滴</b> · 技术负责人<span>系统从 0 到 1 重构</span></div></div>
+      <div class="tl-row"><div class="tl-yr">2018 — 2020</div><div class="tl-what"><b>OKX (OKEX)</b> · 交易网关架构<span>高并发撮合 / 行情网关</span></div></div>
+      <div class="tl-row"><div class="tl-yr">2015 — 2018</div><div class="tl-what"><b>搜狐</b> · 智能客服系统<span>从 0 到 1 构建</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="section-label">Projects</div>
+    <h2>在做的<span class="grad">东西</span>。</h2>
+    <p class="section-lede">独立开发的小工具与方法论，覆盖 macOS、Web、AI 工作流。</p>
+    <div class="proj-grid">
+
+      <div class="proj">
+        <div class="proj-img energy">energy-day · preview</div>
+        <div class="proj-body">
+          <div class="proj-head"><div class="proj-name">energy-day</div><div class="proj-vis private">Private</div></div>
+          <p class="proj-desc">每日精力管理工具，AI 辅助复盘。把"今天感觉怎样"变成可追踪的数据。</p>
+          <div class="proj-tags"><span>TypeScript</span><span>AI</span></div>
+          <div class="proj-meta-private">Private repository</div>
+        </div>
+      </div>
+
+      <div class="proj">
+        <div class="proj-img landr">landr · preview</div>
+        <div class="proj-body">
+          <div class="proj-head"><div class="proj-name">landr</div><div class="proj-vis">Public</div></div>
+          <p class="proj-desc">Landing page builder。把"做一个能上线的着陆页"压缩到一杯咖啡的时间。</p>
+          <div class="proj-tags"><span>TypeScript</span><span>Web</span></div>
+          <a class="proj-link" href="https://github.com/leonbuilds/landr" target="_blank">View on GitHub →</a>
+        </div>
+      </div>
+
+      <div class="proj">
+        <div class="proj-img clip">clip-shot · preview</div>
+        <div class="proj-body">
+          <div class="proj-head"><div class="proj-name">clip-shot</div><div class="proj-vis private">Private</div></div>
+          <p class="proj-desc">macOS 菜单栏小工具，剪贴板图片自动上传到 OSS 并生成 Markdown 链接。</p>
+          <div class="proj-tags"><span>Swift</span><span>macOS</span></div>
+          <div class="proj-meta-private">Private repository</div>
+        </div>
+      </div>
+
+      <div class="proj">
+        <div class="proj-img speak">speak-deck · preview</div>
+        <div class="proj-body">
+          <div class="proj-head"><div class="proj-name">speak-deck</div><div class="proj-vis">Public</div></div>
+          <p class="proj-desc">Claude Code 驱动的演讲工作流，HTML 幻灯片 + 本人声音口播全自动生成。</p>
+          <div class="proj-tags"><span>HTML</span><span>Claude Code</span></div>
+          <a class="proj-link" href="https://github.com/leonbuilds/speak-deck" target="_blank">View on GitHub →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="writing">
+  <div class="wrap">
+    <div class="section-label">Writing</div>
+    <h2>最近<span class="grad">在想什么</span>。</h2>
+    <p class="section-lede">来自公众号「AI 工作台」与小红书，每日自动同步（占位示例）。</p>
+    <div class="write-grid">
+      <a class="write" href="#">
+        <div class="top"><span>May 22</span><span class="src">公众号</span></div>
+        <h3>用 Claude Code 一周内做完一个能上架的 macOS 工具</h3>
+      </a>
+      <a class="write" href="#">
+        <div class="top"><span>May 18</span><span class="src">公众号</span></div>
+        <h3>把需求采访变成 Skill：让 AI 自己问对问题</h3>
+      </a>
+      <a class="write" href="#">
+        <div class="top"><span>May 12</span><span class="src">小红书</span></div>
+        <h3>Agentic Coding 工作流 v2：从想法到 PR 的全自动实验</h3>
+      </a>
+      <a class="write" href="#">
+        <div class="top"><span>May 04</span><span class="src">公众号</span></div>
+        <h3>为什么后端工程师，最适合做 AI 工程化</h3>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-cta">
+      <h2>有想聊的？<span class="grad">写信吧。</span></h2>
+      <p>合作、咨询、课程问题都欢迎，回复一般在 24 小时内。</p>
+      <div class="contact-links">
+        <a class="contact-link primary" href="mailto:liangliang1259@gmail.com">✉  liangliang1259@gmail.com</a>
+        <a class="contact-link" href="https://github.com/leonbuilds" target="_blank">⌘  github.com/leonbuilds</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    © 2026 Leon · Built with Claude Code · <a href="../index.html">← back to mocks</a>
+  </div>
+</footer>
+
+</body>
+</html>

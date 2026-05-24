@@ -1,0 +1,94 @@
+{
+  "meta": {
+    "title": "Leon · Engineering AI workflows that ship",
+    "description": "Personal site of Leon. AI Engineering Practitioner & Course Builder, backed by 10 years of Java backend architecture. Claude Code, Agentic Coding, and AI workflow notes.",
+    "ogAlt": "lumen — Leon's personal site"
+  },
+  "nav": {
+    "about": "About",
+    "projects": "Projects",
+    "writing": "Writing",
+    "contact": "Contact",
+    "contactCta": "Contact",
+    "themeToggle": "Toggle theme",
+    "langToggle": "Switch language"
+  },
+  "hero": {
+    "available": "Available for collaboration",
+    "titleA": "Engineering thinking,",
+    "titleHighlight": "AI",
+    "titleB": "that's truly reusable.",
+    "lede": "Leon · AI Engineering Practitioner & Course Builder.\n10 years of Java backend behind, turning AI collaboration from demo into methodology.",
+    "ctaPrimary": "Contact me →",
+    "ctaSecondary": "See projects",
+    "statYears": "10+",
+    "statYearsLabel": "Years Backend",
+    "statProducts": "4",
+    "statProductsLabel": "Shipped Products",
+    "statCohorts": "2",
+    "statCohortsLabel": "Active Cohorts"
+  },
+  "about": {
+    "label": "About",
+    "headingA": "Three roles,",
+    "headingHighlight": "one thread",
+    "headingB": ".",
+    "lede": "Bringing engineering rigor to AI — not prompt-poking demos, but turning interview, design, build, and review into a reusable practice.",
+    "role01Idx": "[ 01 / now ]",
+    "role01Title": "AI Engineering & Teaching",
+    "role01Desc": "Claude Code · Agentic Coding · MCP · Claude API. Courses: AiCoding Practical v2.0, AI Creator Bootcamp.",
+    "role02Idx": "[ 02 / backing ]",
+    "role02Title": "10 yrs Java Backend",
+    "role02Desc": "Spring Cloud / Kafka / Redis at source level; high-concurrency distributed systems; JVM tuning; 4 years leading a 6-person team.",
+    "role03Idx": "[ 03 / writing ]",
+    "role03Title": "WeChat «AI Workbench»",
+    "role03Desc": "Daily AI news automation plus original writing; Xiaohongshu tools and workflow shares — in language developers actually use.",
+    "tl1Year": "2020 — 2022",
+    "tl1Org": "DiDi",
+    "tl1Role": "Tech Lead",
+    "tl1Desc": "System rebuild from 0 to 1",
+    "tl2Year": "2018 — 2020",
+    "tl2Org": "OKX (OKEX)",
+    "tl2Role": "Trading Gateway",
+    "tl2Desc": "High-concurrency matching / market data gateway",
+    "tl3Year": "2015 — 2018",
+    "tl3Org": "Sohu",
+    "tl3Role": "Smart Customer Service",
+    "tl3Desc": "Built from 0 to 1"
+  },
+  "projects": {
+    "label": "Projects",
+    "headingA": "Things",
+    "headingHighlight": "I'm building",
+    "headingB": ".",
+    "lede": "Independent tools and methodologies across macOS, web, and AI workflows.",
+    "visPublic": "Public",
+    "visPrivate": "Private",
+    "viewOnGithub": "View on GitHub →",
+    "privateRepo": "Private repository",
+    "energyDayDesc": "Daily energy management with AI-assisted review. Turns \"how was today\" into trackable data.",
+    "landrDesc": "Landing page builder. Compresses \"a launchable landing page\" into a coffee break.",
+    "clipShotDesc": "macOS menu bar tool — clipboard image to OSS, returns a Markdown link.",
+    "speakDeckDesc": "Claude Code–powered talk pipeline: HTML slides + voice narration, fully auto-generated."
+  },
+  "writing": {
+    "label": "Writing",
+    "headingA": "Recent",
+    "headingHighlight": "thoughts",
+    "headingB": ".",
+    "lede": "Synced daily from WeChat «AI Workbench» and Xiaohongshu.",
+    "empty": "Nothing new lately",
+    "sourceWechat": "WeChat",
+    "sourceXhs": "Xiaohongshu"
+  },
+  "contact": {
+    "label": "Contact",
+    "headingA": "Want to talk?",
+    "headingHighlight": "Drop a line",
+    "headingB": ".",
+    "lede": "Open to collaborations, consulting, and course questions. Usually reply within 24h."
+  },
+  "footer": {
+    "copyright": "© 2026 Leon · Built with Claude Code"
+  }
+}

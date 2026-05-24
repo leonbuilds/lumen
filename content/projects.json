@@ -1,0 +1,40 @@
+[
+  {
+    "slug": "energy-day",
+    "name": "energy-day",
+    "visibility": "private",
+    "descKey": "energyDayDesc",
+    "tags": ["TypeScript", "AI"],
+    "repo": "leonbuilds/energy-day",
+    "gradient": "from-emerald-900 to-emerald-950"
+  },
+  {
+    "slug": "landr",
+    "name": "landr",
+    "visibility": "public",
+    "descKey": "landrDesc",
+    "tags": ["TypeScript", "Web"],
+    "repo": "leonbuilds/landr",
+    "url": "https://github.com/leonbuilds/landr",
+    "gradient": "from-indigo-900 to-indigo-950"
+  },
+  {
+    "slug": "clip-shot",
+    "name": "clip-shot",
+    "visibility": "private",
+    "descKey": "clipShotDesc",
+    "tags": ["Swift", "macOS"],
+    "repo": "leonbuilds/clip-shot",
+    "gradient": "from-fuchsia-900 to-fuchsia-950"
+  },
+  {
+    "slug": "speak-deck",
+    "name": "speak-deck",
+    "visibility": "public",
+    "descKey": "speakDeckDesc",
+    "tags": ["HTML", "Claude Code"],
+    "repo": "leonbuilds/speak-deck",
+    "url": "https://github.com/leonbuilds/speak-deck",
+    "gradient": "from-amber-900 to-amber-950"
+  }
+]

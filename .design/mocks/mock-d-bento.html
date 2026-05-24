@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Leon · AI Engineering & Teaching — Bento Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0c0c10; --surface:#16161d; --surface-2:#1d1d27;
+    --border:#252533; --border-soft:#1c1c25;
+    --text:#f3f3f6; --text-dim:#9a9aaa; --text-faint:#5d5d6a;
+    --green:#22d39a; --blue:#5eaaff; --orange:#ffa14a; --purple:#b18aff; --pink:#ff7eb6; --yellow:#ffd35e;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--bg);color:var(--text);font-family:'Inter',-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif;font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased;min-height:100vh}
+  .mono{font-family:'JetBrains Mono',monospace}
+  a{color:inherit;text-decoration:none;transition:opacity .15s}
+  a:hover{opacity:.85}
+  ::selection{background:rgba(94,170,255,.35)}
+
+  /* PAGE LAYOUT */
+  .page{max-width:1100px;margin:0 auto;padding:36px 24px 64px}
+
+  /* TOP BAR */
+  .topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
+  .topbar .brand{display:flex;align-items:center;gap:12px;font-weight:600}
+  .topbar .brand .orb{width:30px;height:30px;border-radius:8px;background:conic-gradient(from 180deg,var(--green),var(--blue),var(--purple),var(--pink),var(--orange),var(--green));box-shadow:0 4px 14px rgba(94,170,255,.3)}
+  .topbar .right{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--text-dim)}
+  .topbar .lang{padding:6px 12px;border-radius:999px;border:1px solid var(--border);font-family:'JetBrains Mono',monospace;font-size:12px}
+  .topbar .cta-mini{padding:8px 16px;border-radius:999px;background:#fff;color:#000;font-weight:500;font-size:13px}
+
+  /* BENTO GRID */
+  .bento{display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:minmax(140px,auto);gap:14px}
+  .cell{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:24px;overflow:hidden;position:relative;transition:transform .18s,border-color .18s}
+  .cell:hover{transform:translateY(-2px);border-color:#33334a}
+
+  /* HEADER CELL (Hero) — wide */
+  .c-hero{grid-column:span 4;grid-row:span 2;display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(135deg,#181822 0%,#11111a 100%);position:relative;overflow:hidden}
+  .c-hero::before{content:"";position:absolute;top:-100px;right:-100px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(94,170,255,.25),transparent 70%);pointer-events:none}
+  .c-hero .status{display:inline-flex;align-items:center;gap:8px;padding:5px 12px;border-radius:999px;border:1px solid var(--border);background:rgba(255,255,255,.03);font-size:12px;color:var(--text-dim);align-self:flex-start;position:relative;z-index:1}
+  .c-hero .status .dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green)}
+  .c-hero .name{font-size:14px;color:var(--text-dim);margin-top:24px;font-family:'JetBrains Mono',monospace;position:relative;z-index:1}
+  .c-hero h1{font-size:38px;line-height:1.1;letter-spacing:-.03em;font-weight:600;margin-top:8px;position:relative;z-index:1}
+  .c-hero h1 .accent{color:var(--blue)}
+  .c-hero .lede{color:var(--text-dim);font-size:15px;margin-top:14px;max-width:480px;position:relative;z-index:1}
+  .c-hero .cta-row{margin-top:24px;display:flex;gap:10px;position:relative;z-index:1}
+  .c-hero .btn-p{padding:10px 18px;border-radius:999px;background:#fff;color:#000;font-weight:500;font-size:13px}
+  .c-hero .btn-g{padding:10px 18px;border-radius:999px;border:1px solid var(--border);color:var(--text);font-size:13px}
+
+  /* AVATAR CELL — square */
+  .c-avatar{grid-column:span 2;grid-row:span 2;background:linear-gradient(135deg,#1e3a5f,#0d2440);display:flex;align-items:center;justify-content:center;padding:0;overflow:hidden;position:relative}
+  .c-avatar .photo{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:96px;color:rgba(255,255,255,.35);font-family:'JetBrains Mono',monospace;font-weight:700;letter-spacing:-.05em;background:radial-gradient(circle at 30% 30%,rgba(94,170,255,.3),transparent 60%)}
+  .c-avatar .badge{position:absolute;bottom:18px;left:18px;display:flex;align-items:center;gap:6px;font-size:12px;color:#fff;padding:6px 10px;border-radius:999px;background:rgba(0,0,0,.4);backdrop-filter:blur(8px)}
+  .c-avatar .badge .pulse{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green)}
+
+  /* IDENTITY CARDS — 3 columns */
+  .c-role{grid-column:span 2}
+  .c-role .icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:12px}
+  .c-role .icon.now{background:rgba(34,211,154,.15);color:var(--green)}
+  .c-role .icon.back{background:rgba(94,170,255,.15);color:var(--blue)}
+  .c-role .icon.write{background:rgba(255,161,74,.15);color:var(--orange)}
+  .c-role .label{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-faint);font-family:'JetBrains Mono',monospace;margin-bottom:4px}
+  .c-role h3{font-size:15px;font-weight:600;margin-bottom:6px}
+  .c-role p{font-size:12px;color:var(--text-dim);line-height:1.55}
+
+  /* STATS CELL */
+  .c-stats{grid-column:span 3;display:flex;align-items:center;justify-content:space-around;padding:24px 16px}
+  .c-stats .stat{text-align:center}
+  .c-stats .n{font-size:30px;font-weight:600;color:var(--text);font-family:'JetBrains Mono',monospace}
+  .c-stats .n.g{color:var(--green)} .c-stats .n.b{color:var(--blue)} .c-stats .n.o{color:var(--orange)}
+  .c-stats .l{font-size:11px;color:var(--text-faint);margin-top:4px;letter-spacing:.06em;text-transform:uppercase}
+
+  /* TIMELINE CELL */
+  .c-timeline{grid-column:span 3}
+  .c-timeline .label{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-faint);font-family:'JetBrains Mono',monospace;margin-bottom:14px}
+  .c-timeline ul{list-style:none}
+  .c-timeline li{display:grid;grid-template-columns:90px 1fr;gap:14px;padding:7px 0;font-size:13px;border-bottom:1px dashed var(--border-soft)}
+  .c-timeline li:last-child{border-bottom:none}
+  .c-timeline .yr{color:var(--text-faint);font-family:'JetBrains Mono',monospace;font-size:12px}
+  .c-timeline .w{color:var(--text-dim)} .c-timeline .w b{color:var(--text);font-weight:500}
+
+  /* PROJECT CARDS */
+  .c-proj{grid-column:span 3;padding:0;overflow:hidden;display:flex;flex-direction:column}
+  .c-proj .img{flex:1;min-height:130px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.7);font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.05em}
+  .c-proj.energy .img{background:linear-gradient(135deg,#1a3d2a,#0a2818)}
+  .c-proj.landr .img{background:linear-gradient(135deg,#1e2a5a,#0f1a3a)}
+  .c-proj.clip .img{background:linear-gradient(135deg,#3d1a3d,#28102a)}
+  .c-proj.speak .img{background:linear-gradient(135deg,#3d2a1a,#281a0a)}
+  .c-proj .body{padding:16px 20px}
+  .c-proj .head{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+  .c-proj .name{font-size:16px;font-weight:600}
+  .c-proj .vis{font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:2px 8px;border-radius:999px;color:var(--text-faint);border:1px solid var(--border)}
+  .c-proj .vis.private{color:var(--yellow);border-color:rgba(255,211,94,.3)}
+  .c-proj .desc{font-size:12px;color:var(--text-dim);margin-bottom:10px;line-height:1.55}
+  .c-proj .tags{display:flex;gap:6px;flex-wrap:wrap}
+  .c-proj .tag{font-size:10px;padding:2px 8px;border-radius:999px;background:rgba(255,255,255,.05);color:var(--text-dim);font-family:'JetBrains Mono',monospace}
+
+  /* WRITING WIDE */
+  .c-writing{grid-column:span 4}
+  .c-writing .head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+  .c-writing .head h3{font-size:15px;font-weight:600}
+  .c-writing .head .from{font-size:11px;color:var(--text-faint);font-family:'JetBrains Mono',monospace}
+  .c-writing ul{list-style:none}
+  .c-writing li{display:grid;grid-template-columns:60px 1fr 70px;gap:12px;padding:8px 0;border-bottom:1px solid var(--border-soft);align-items:center;font-size:13px}
+  .c-writing li:last-child{border-bottom:none}
+  .c-writing .date{color:var(--text-faint);font-family:'JetBrains Mono',monospace;font-size:11px}
+  .c-writing .ti{color:var(--text)}
+  .c-writing .src{font-size:10px;text-align:right;color:var(--text-faint);padding:2px 8px;border-radius:999px;background:rgba(255,255,255,.04);justify-self:end}
+
+  /* CONTACT — small bento */
+  .c-contact{grid-column:span 2;background:linear-gradient(135deg,#221a3a,#11091f);display:flex;flex-direction:column;justify-content:space-between}
+  .c-contact .label{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-faint);font-family:'JetBrains Mono',monospace;margin-bottom:8px}
+  .c-contact h3{font-size:20px;font-weight:600;margin-bottom:8px;line-height:1.2}
+  .c-contact h3 .acc{color:var(--purple)}
+  .c-contact .links{display:flex;flex-direction:column;gap:8px;margin-top:16px}
+  .c-contact a{padding:8px 12px;border-radius:10px;background:rgba(255,255,255,.05);font-size:12px;display:flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace}
+  .c-contact a .ic{color:var(--purple)}
+
+  /* MUSIC / NOW PLAYING — playful */
+  .c-now{grid-column:span 2;background:linear-gradient(135deg,#3a1a22,#1f0911)}
+  .c-now .label{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-faint);font-family:'JetBrains Mono',monospace;margin-bottom:10px}
+  .c-now .now-row{display:flex;align-items:center;gap:12px}
+  .c-now .cover{width:48px;height:48px;border-radius:8px;background:linear-gradient(135deg,var(--pink),var(--orange));flex-shrink:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:20px}
+  .c-now .meta-t{flex:1;min-width:0}
+  .c-now .ti{font-size:13px;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .c-now .ar{font-size:11px;color:var(--text-dim);margin-top:2px}
+  .c-now .bars{display:flex;gap:3px;align-items:end;margin-top:14px;height:18px}
+  .c-now .bars span{width:3px;background:var(--pink);border-radius:2px;animation:bar 1.2s ease-in-out infinite alternate}
+  .c-now .bars span:nth-child(1){height:60%;animation-delay:0s}
+  .c-now .bars span:nth-child(2){height:90%;animation-delay:.2s}
+  .c-now .bars span:nth-child(3){height:40%;animation-delay:.4s}
+  .c-now .bars span:nth-child(4){height:75%;animation-delay:.1s}
+  .c-now .bars span:nth-child(5){height:50%;animation-delay:.3s}
+  @keyframes bar{from{transform:scaleY(.4)}to{transform:scaleY(1)}}
+
+  footer{margin-top:32px;color:var(--text-faint);font-size:12px;font-family:'JetBrains Mono',monospace;text-align:center}
+  footer a{color:var(--text-dim)}
+
+  @media (max-width:880px){
+    .bento{grid-template-columns:repeat(2,1fr)}
+    .c-hero,.c-avatar,.c-role,.c-stats,.c-timeline,.c-proj,.c-writing,.c-contact,.c-now{grid-column:span 2;grid-row:auto}
+    .c-hero h1{font-size:28px}
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <div class="topbar">
+    <div class="brand"><span class="orb"></span> lumen</div>
+    <div class="right">
+      <span class="lang mono">ZH</span>
+      <a class="cta-mini" href="#contact">Contact</a>
+    </div>
+  </div>
+
+  <div class="bento">
+
+    <!-- Hero (wide) -->
+    <div class="cell c-hero">
+      <span class="status"><span class="dot"></span>Available · 接受合作 / 咨询</span>
+      <div>
+        <div class="name">// hi, I'm</div>
+        <h1>Leon — 用工程化思维，<br>让 <span class="accent">AI</span> 真正可复用。</h1>
+        <p class="lede">AI Engineering Practitioner &amp; Course Builder.<br>10 年 Java 后端为底，把 AI 协作从 demo 变成方法论。</p>
+        <div class="cta-row">
+          <a class="btn-p" href="#contact">联系我 →</a>
+          <a class="btn-g" href="#proj">看作品</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Avatar (square) -->
+    <div class="cell c-avatar">
+      <div class="photo">L</div>
+      <div class="badge"><span class="pulse"></span>Hangzhou · UTC+8</div>
+    </div>
+
+    <!-- 3 role cards -->
+    <div class="cell c-role">
+      <div class="icon now">⚡</div>
+      <div class="label">[ 01 / now ]</div>
+      <h3>AI 工程化 + 教育</h3>
+      <p>Claude Code · Agentic Coding · MCP · Claude API。AiCoding 实战课 v2.0、AI 创变者训练营。</p>
+    </div>
+    <div class="cell c-role">
+      <div class="icon back">◆</div>
+      <div class="label">[ 02 / backing ]</div>
+      <h3>10 yrs Java 后端</h3>
+      <p>Spring Cloud / Kafka / Redis 源码级；高并发分布式；JVM 调优；带过 6 人团队。</p>
+    </div>
+    <div class="cell c-role">
+      <div class="icon write">✎</div>
+      <div class="label">[ 03 / writing ]</div>
+      <h3>「AI 工作台」</h3>
+      <p>公众号 + 小红书每日 AI 工具、工作流分享。用开发者听得懂的语言讲清楚。</p>
+    </div>
+
+    <!-- Stats -->
+    <div class="cell c-stats">
+      <div class="stat"><div class="n g">10+</div><div class="l">Years Backend</div></div>
+      <div class="stat"><div class="n b">4</div><div class="l">Shipped Products</div></div>
+      <div class="stat"><div class="n o">2</div><div class="l">Active Cohorts</div></div>
+    </div>
+
+    <!-- Timeline -->
+    <div class="cell c-timeline">
+      <div class="label">// experience</div>
+      <ul>
+        <li><span class="yr">'20 — '22</span><span class="w"><b>滴滴</b> · 技术负责人 · 0 → 1 重构</span></li>
+        <li><span class="yr">'18 — '20</span><span class="w"><b>OKX</b> · 交易网关架构</span></li>
+        <li><span class="yr">'15 — '18</span><span class="w"><b>搜狐</b> · 智能客服 0 → 1</span></li>
+      </ul>
+    </div>
+
+    <!-- 4 project cards -->
+    <a class="cell c-proj energy" id="proj">
+      <div class="img">energy-day · preview</div>
+      <div class="body">
+        <div class="head"><div class="name">energy-day</div><div class="vis private">Private</div></div>
+        <div class="desc">每日精力管理，AI 辅助复盘。</div>
+        <div class="tags"><span class="tag">TypeScript</span><span class="tag">AI</span></div>
+      </div>
+    </a>
+    <a class="cell c-proj landr" href="https://github.com/leonbuilds/landr" target="_blank">
+      <div class="img">landr · preview</div>
+      <div class="body">
+        <div class="head"><div class="name">landr</div><div class="vis">Public</div></div>
+        <div class="desc">Landing page builder，一杯咖啡的时间。</div>
+        <div class="tags"><span class="tag">TypeScript</span><span class="tag">Web</span></div>
+      </div>
+    </a>
+    <a class="cell c-proj clip">
+      <div class="img">clip-shot · preview</div>
+      <div class="body">
+        <div class="head"><div class="name">clip-shot</div><div class="vis private">Private</div></div>
+        <div class="desc">macOS 菜单栏：剪贴板 → OSS → Markdown 链接。</div>
+        <div class="tags"><span class="tag">Swift</span><span class="tag">macOS</span></div>
+      </div>
+    </a>
+    <a class="cell c-proj speak" href="https://github.com/leonbuilds/speak-deck" target="_blank">
+      <div class="img">speak-deck · preview</div>
+      <div class="body">
+        <div class="head"><div class="name">speak-deck</div><div class="vis">Public</div></div>
+        <div class="desc">Claude Code 驱动的演讲工作流。</div>
+        <div class="tags"><span class="tag">HTML</span><span class="tag">Claude Code</span></div>
+      </div>
+    </a>
+
+    <!-- Writing wide -->
+    <div class="cell c-writing">
+      <div class="head">
+        <h3>最近的 Writing</h3>
+        <span class="from">// 公众号「AI 工作台」 · 小红书</span>
+      </div>
+      <ul>
+        <li><span class="date">05-22</span><a class="ti" href="#">用 Claude Code 一周内做完一个能上架的 macOS 工具</a><span class="src">公众号</span></li>
+        <li><span class="date">05-18</span><a class="ti" href="#">把需求采访变成 Skill：让 AI 自己问对问题</a><span class="src">公众号</span></li>
+        <li><span class="date">05-12</span><a class="ti" href="#">Agentic Coding 工作流 v2 实战记录</a><span class="src">小红书</span></li>
+        <li><span class="date">05-04</span><a class="ti" href="#">为什么后端工程师最适合做 AI 工程化</a><span class="src">公众号</span></li>
+      </ul>
+    </div>
+
+    <!-- Contact small bento -->
+    <div class="cell c-contact" id="contact">
+      <div>
+        <div class="label">// reach out</div>
+        <h3>聊聊？<br><span class="acc">写信吧。</span></h3>
+      </div>
+      <div class="links">
+        <a href="mailto:liangliang1259@gmail.com"><span class="ic">✉</span>liangliang1259@gmail.com</a>
+        <a href="https://github.com/leonbuilds" target="_blank"><span class="ic">⌘</span>github.com/leonbuilds</a>
+      </div>
+    </div>
+
+    <!-- Now playing (whimsical) -->
+    <div class="cell c-now">
+      <div class="label">// now building</div>
+      <div class="now-row">
+        <div class="cover">⚙</div>
+        <div class="meta-t">
+          <div class="ti">lumen — 个人主页 v1</div>
+          <div class="ar">Claude Code · Next.js · 2026 W21</div>
+        </div>
+      </div>
+      <div class="bars"><span></span><span></span><span></span><span></span><span></span></div>
+    </div>
+
+  </div>
+
+  <footer>// © 2026 leon · built with claude code · <a href="../index.html">← back to mocks</a></footer>
+
+</div>
+
+</body>
+</html>

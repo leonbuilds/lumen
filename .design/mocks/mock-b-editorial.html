@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Leon · AI Engineering & Teaching — Editorial</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fafaf7; --bg-elev:#fff; --border:#e6e3dc;
+    --text:#1a1a1a; --text-soft:#3a3a3a; --text-dim:#7a7a7a; --text-faint:#a8a5a0;
+    --accent:#a8472b; /* warm sienna */
+    --rule:#dcd8d0;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--bg);color:var(--text);font-family:'Inter',-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif;font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+  .serif{font-family:'Newsreader','Source Han Serif SC',Georgia,serif;font-weight:400;letter-spacing:-.005em}
+  a{color:var(--text);text-decoration:none;border-bottom:1px solid var(--rule);transition:border-color .15s}
+  a:hover{border-bottom-color:var(--accent)}
+  ::selection{background:var(--accent);color:#fff}
+
+  .wrap{max-width:720px;margin:0 auto;padding:0 28px}
+
+  nav{padding:24px 0;border-bottom:1px solid var(--rule)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between}
+  nav .logo{font-family:'Newsreader',serif;font-size:18px;font-weight:500;border:none}
+  nav .logo em{font-style:italic;color:var(--accent)}
+  nav .links{display:flex;gap:24px;font-size:14px}
+  nav .links a{color:var(--text-soft);border:none}
+  nav .links a:hover{color:var(--accent)}
+  nav .lang{font-size:12px;color:var(--text-dim);border:none;letter-spacing:.08em}
+
+  /* HERO */
+  .hero{padding:88px 0 72px;border-bottom:1px solid var(--rule)}
+  .hero .kicker{font-family:'Inter',sans-serif;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--text-faint);margin-bottom:24px}
+  .hero h1{font-size:48px;line-height:1.15;letter-spacing:-.02em;color:var(--text);font-weight:500;margin-bottom:28px}
+  .hero h1 em{font-style:italic;color:var(--accent)}
+  .hero .lede{font-size:18px;line-height:1.7;color:var(--text-soft);max-width:600px;margin-bottom:32px}
+  .hero .meta{font-size:14px;color:var(--text-dim);margin-bottom:36px}
+  .hero .meta span{color:var(--text-soft)}
+  .cta-row{display:flex;gap:24px;align-items:center;font-size:14px}
+  .btn-link{color:var(--accent);border-bottom:1px solid var(--accent);padding-bottom:2px;font-weight:500}
+  .btn-link:hover{color:var(--text);border-bottom-color:var(--text)}
+  .btn-secondary{color:var(--text-dim);border:none}
+  .btn-secondary:hover{color:var(--text)}
+
+  /* SECTION */
+  section{padding:72px 0;border-bottom:1px solid var(--rule)}
+  .section-label{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--text-faint);margin-bottom:8px}
+  h2{font-size:32px;line-height:1.25;color:var(--text);font-weight:500;letter-spacing:-.015em;margin-bottom:32px}
+  h2 em{font-style:italic;color:var(--accent)}
+  h3{font-size:16px;color:var(--text);font-weight:500;margin:24px 0 8px}
+  p{color:var(--text-soft);margin-bottom:18px}
+
+  /* ABOUT */
+  .about p{max-width:640px;font-size:17px}
+  .about p em{font-style:italic;color:var(--text);background:linear-gradient(transparent 65%,rgba(168,71,43,.12) 65%)}
+  .timeline{margin-top:36px;padding-top:24px;border-top:1px solid var(--rule)}
+  .timeline-row{display:grid;grid-template-columns:120px 1fr;gap:24px;padding:14px 0;border-bottom:1px dashed var(--rule);font-size:15px}
+  .timeline-row:last-child{border-bottom:none}
+  .timeline-row .yr{color:var(--text-dim);font-variant-numeric:tabular-nums}
+  .timeline-row .what{color:var(--text)}
+  .timeline-row .what b{font-weight:500}
+  .timeline-row .what .desc{color:var(--text-dim);font-size:14px;margin-top:2px}
+
+  /* PROJECTS */
+  .proj-list{display:flex;flex-direction:column;gap:48px}
+  .proj{display:grid;grid-template-columns:200px 1fr;gap:28px;align-items:start}
+  .proj-img{aspect-ratio:4/3;background:#ece8e0;border-radius:2px;display:flex;align-items:center;justify-content:center;color:var(--text-faint);font-family:'Newsreader',serif;font-style:italic;font-size:14px;overflow:hidden;position:relative}
+  .proj-img.energy{background:linear-gradient(135deg,#d4e4d4,#b8d4b8)}
+  .proj-img.landr{background:linear-gradient(135deg,#d4dce8,#b8c4d8)}
+  .proj-img.clip{background:linear-gradient(135deg,#e8d4c8,#d8b8a4)}
+  .proj-img.speak{background:linear-gradient(135deg,#e8e0c8,#d8c8a4)}
+  .proj-head{display:flex;align-items:baseline;gap:12px;margin-bottom:6px;flex-wrap:wrap}
+  .proj-name{font-family:'Newsreader',serif;font-size:24px;font-weight:500;color:var(--text);letter-spacing:-.01em}
+  .proj-vis{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim)}
+  .proj-vis.private{color:var(--accent)}
+  .proj-desc{color:var(--text-soft);font-size:16px;line-height:1.65;margin-bottom:14px;max-width:520px}
+  .proj-tags{display:flex;flex-wrap:wrap;gap:12px;font-size:12px;color:var(--text-dim);margin-bottom:10px}
+  .proj-tags span::before{content:"·  ";color:var(--text-faint)}
+  .proj-tags span:first-child::before{content:""}
+  .proj-meta{font-size:13px;color:var(--text-dim)}
+  .proj-meta a{color:var(--text-soft);border-bottom:1px solid var(--rule)}
+  .proj-meta a:hover{border-bottom-color:var(--accent)}
+
+  /* WRITING */
+  .writing-intro{font-size:15px;color:var(--text-dim);margin-bottom:24px;font-style:italic;font-family:'Newsreader',serif}
+  .write-list{list-style:none;border-top:1px solid var(--rule)}
+  .write-list li{display:grid;grid-template-columns:90px 1fr 100px;gap:24px;padding:20px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+  .write-list .date{color:var(--text-dim);font-size:13px;font-variant-numeric:tabular-nums}
+  .write-list .title{font-family:'Newsreader',serif;font-size:19px;color:var(--text);border:none;letter-spacing:-.005em;line-height:1.4}
+  .write-list .title:hover{color:var(--accent)}
+  .write-list .src{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-faint);text-align:right}
+
+  /* CONTACT */
+  .contact-card{font-size:17px}
+  .contact-row{display:grid;grid-template-columns:100px 1fr;gap:24px;padding:14px 0;border-bottom:1px dashed var(--rule);align-items:baseline}
+  .contact-row:last-child{border-bottom:none}
+  .contact-row .k{color:var(--text-dim);font-size:13px;letter-spacing:.1em;text-transform:uppercase}
+  .contact-row a{color:var(--accent);border-bottom-color:rgba(168,71,43,.3)}
+  .contact-row a:hover{border-bottom-color:var(--accent)}
+
+  footer{padding:48px 0;text-align:center;color:var(--text-faint);font-size:13px}
+  footer em{font-style:italic;font-family:'Newsreader',serif}
+  footer a{color:var(--text-dim);border:none}
+  footer a:hover{color:var(--accent)}
+
+  @media (max-width:640px){
+    .wrap{padding:0 22px}
+    .hero h1{font-size:34px}
+    h2{font-size:26px}
+    .proj{grid-template-columns:1fr;gap:16px}
+    .proj-img{aspect-ratio:16/9}
+    .write-list li{grid-template-columns:1fr;gap:6px}
+    .write-list .src{text-align:left}
+    .timeline-row{grid-template-columns:80px 1fr;gap:14px}
+    nav .links{gap:14px}
+    .contact-row{grid-template-columns:1fr;gap:4px}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="logo">Leon <em>—</em> lumen</div>
+    <div class="links">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#writing">Writing</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="lang">中 · EN</div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">— Engineering · AI · Teaching</div>
+    <h1 class="serif">用工程化思维，<br>让 <em>AI</em> 真正可复用。</h1>
+    <p class="lede">我是 Leon。过去十年做后端架构，现在把这套思维迁到 AI 工程化与课程教育上 — 让 AI 不只是 demo，而是可以被复用、被讲清楚、被传承的方法论。</p>
+    <div class="meta">
+      <span>AI Engineering Practitioner</span> &nbsp;·&nbsp; <span>Course Builder</span> &nbsp;·&nbsp; 10 yrs Java backend
+    </div>
+    <div class="cta-row">
+      <a href="#contact" class="btn-link">联系我 →</a>
+      <a href="#projects" class="btn-secondary">看作品集</a>
+    </div>
+  </div>
+</header>
+
+<section id="about" class="about">
+  <div class="wrap">
+    <div class="section-label">About</div>
+    <h2 class="serif">三重身份，<em>一条主线</em>。</h2>
+    <p>过去十年我在<strong>滴滴、OKX、搜狐</strong>做后端架构，参与过千万级撮合平台、营销中台、交易网关从 0 到 1 的设计，带过 6 人团队，做过技术规划与招聘。</p>
+    <p>2023 年起，我开始把工程化方法用在 AI 上 — 不是写 prompt 玩 demo，而是把<em>采访、设计、实现、复盘</em>这套软件工程节奏，迁到 AI 协作流程里。这也是我现在做<strong>《AiCoding 实战课》</strong>与<strong>《AI 创变者训练营》</strong>的底层逻辑。</p>
+    <p>同时在公众号<strong>「AI 工作台」</strong>和小红书做日常输出，把工具、工作流、方法论用开发者能听懂的语言讲清楚。</p>
+    <div class="timeline">
+      <div class="timeline-row">
+        <div class="yr">2023 — 至今</div>
+        <div class="what"><b>AI 工程化 + 课程教育</b><div class="desc">Claude Code · Agentic Coding · MCP · Claude API</div></div>
+      </div>
+      <div class="timeline-row">
+        <div class="yr">2020 — 2022</div>
+        <div class="what"><b>滴滴</b> · 技术负责人<div class="desc">系统从 0 到 1 重构</div></div>
+      </div>
+      <div class="timeline-row">
+        <div class="yr">2018 — 2020</div>
+        <div class="what"><b>OKX (OKEX)</b> · 交易网关架构<div class="desc">高并发撮合 / 行情网关设计</div></div>
+      </div>
+      <div class="timeline-row">
+        <div class="yr">2015 — 2018</div>
+        <div class="what"><b>搜狐</b> · 智能客服系统<div class="desc">从 0 到 1 构建</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="section-label">Projects</div>
+    <h2 class="serif">在做的<em>东西</em>。</h2>
+    <div class="proj-list">
+
+      <article class="proj">
+        <div class="proj-img energy">energy-day</div>
+        <div>
+          <div class="proj-head">
+            <div class="proj-name">energy-day</div>
+            <div class="proj-vis private">Private</div>
+          </div>
+          <p class="proj-desc">每日精力管理工具，AI 辅助复盘 — 把"今天感觉怎样"变成可追踪的数据与可复用的洞察。</p>
+          <div class="proj-tags"><span>TypeScript</span><span>AI</span></div>
+          <div class="proj-meta">Private repository</div>
+        </div>
+      </article>
+
+      <article class="proj">
+        <div class="proj-img landr">landr</div>
+        <div>
+          <div class="proj-head">
+            <div class="proj-name">landr</div>
+            <div class="proj-vis">Public</div>
+          </div>
+          <p class="proj-desc">Landing page builder — 把"做一个能上线的着陆页"压缩到一杯咖啡的时间。</p>
+          <div class="proj-tags"><span>TypeScript</span><span>Web</span></div>
+          <div class="proj-meta"><a href="https://github.com/leonbuilds/landr" target="_blank">github.com/leonbuilds/landr</a></div>
+        </div>
+      </article>
+
+      <article class="proj">
+        <div class="proj-img clip">clip-shot</div>
+        <div>
+          <div class="proj-head">
+            <div class="proj-name">clip-shot</div>
+            <div class="proj-vis private">Private</div>
+          </div>
+          <p class="proj-desc">macOS 菜单栏小工具，把剪贴板里的图片自动上传到 OSS 并生成 Markdown 链接。写作流里的"消失的摩擦"。</p>
+          <div class="proj-tags"><span>Swift</span><span>macOS</span></div>
+          <div class="proj-meta">Private repository</div>
+        </div>
+      </article>
+
+      <article class="proj">
+        <div class="proj-img speak">speak-deck</div>
+        <div>
+          <div class="proj-head">
+            <div class="proj-name">speak-deck</div>
+            <div class="proj-vis">Public</div>
+          </div>
+          <p class="proj-desc">Claude Code 驱动的演讲工作流 — 一份 HTML 幻灯片 + 本人声音口播，从 outline 到成片可自动生成。</p>
+          <div class="proj-tags"><span>HTML</span><span>Claude Code</span></div>
+          <div class="proj-meta"><a href="https://github.com/leonbuilds/speak-deck" target="_blank">github.com/leonbuilds/speak-deck</a></div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section id="writing">
+  <div class="wrap">
+    <div class="section-label">Writing</div>
+    <h2 class="serif">最近<em>在想什么</em>。</h2>
+    <p class="writing-intro">来自公众号「AI 工作台」与小红书，每日自动同步（占位示例）。</p>
+    <ul class="write-list">
+      <li>
+        <span class="date">May 22</span>
+        <a class="title" href="#">用 Claude Code 一周内做完一个能上架的 macOS 工具</a>
+        <span class="src">公众号</span>
+      </li>
+      <li>
+        <span class="date">May 18</span>
+        <a class="title" href="#">把需求采访变成 Skill：让 AI 自己问对问题</a>
+        <span class="src">公众号</span>
+      </li>
+      <li>
+        <span class="date">May 12</span>
+        <a class="title" href="#">Agentic Coding 工作流 v2：从想法到 PR 的全自动实验</a>
+        <span class="src">小红书</span>
+      </li>
+      <li>
+        <span class="date">May 04</span>
+        <a class="title" href="#">为什么后端工程师，最适合做 AI 工程化</a>
+        <span class="src">公众号</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="section-label">Contact</div>
+    <h2 class="serif">想聊聊？<em>写信吧。</em></h2>
+    <div class="contact-card">
+      <div class="contact-row">
+        <div class="k">Email</div>
+        <a href="mailto:liangliang1259@gmail.com">liangliang1259@gmail.com</a>
+      </div>
+      <div class="contact-row">
+        <div class="k">GitHub</div>
+        <a href="https://github.com/leonbuilds" target="_blank">github.com/leonbuilds</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <em>© 2026 Leon · Crafted in Hangzhou ·</em> <a href="../index.html">← back to mocks</a>
+  </div>
+</footer>
+
+</body>
+</html>

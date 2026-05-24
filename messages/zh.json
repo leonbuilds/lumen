@@ -1,0 +1,94 @@
+{
+  "meta": {
+    "title": "Leon · 用工程化思维，让 AI 真正可复用",
+    "description": "Leon（孙亮亮）的个人主页。AI 工程化实践者 + 课程讲师，10 年 Java 后端为底。Claude Code、Agentic Coding、AI 工作流分享。",
+    "ogAlt": "lumen — Leon 的个人主页"
+  },
+  "nav": {
+    "about": "关于",
+    "projects": "作品",
+    "writing": "文章",
+    "contact": "联系",
+    "contactCta": "联系我",
+    "themeToggle": "切换主题",
+    "langToggle": "切换语言"
+  },
+  "hero": {
+    "available": "Available · 接受咨询合作",
+    "titleA": "用工程化思维，让",
+    "titleHighlight": "AI",
+    "titleB": "真正可复用。",
+    "lede": "Leon · AI Engineering Practitioner & Course Builder.\n10 年 Java 后端为底，把 AI 协作从 demo 变成方法论。",
+    "ctaPrimary": "联系我 →",
+    "ctaSecondary": "看作品集",
+    "statYears": "10+",
+    "statYearsLabel": "Years Backend",
+    "statProducts": "4",
+    "statProductsLabel": "Shipped Products",
+    "statCohorts": "2",
+    "statCohortsLabel": "Active Cohorts"
+  },
+  "about": {
+    "label": "About",
+    "headingA": "三重身份，",
+    "headingHighlight": "一条主线",
+    "headingB": "。",
+    "lede": "把工程化方法迁到 AI 上——不是写 prompt 玩 demo，而是把「采访、设计、实现、复盘」做成可复用的方法。",
+    "role01Idx": "[ 01 / now ]",
+    "role01Title": "AI 工程化 + 教育",
+    "role01Desc": "Claude Code · Agentic Coding · MCP · Claude API。课程产品：AiCoding 实战课 v2.0、AI 创变者训练营。",
+    "role02Idx": "[ 02 / backing ]",
+    "role02Title": "10 yrs Java 后端",
+    "role02Desc": "Spring Cloud / Kafka / Redis 源码级；高并发、分布式、微服务；JVM 调优；4 年带 6 人团队。",
+    "role03Idx": "[ 03 / writing ]",
+    "role03Title": "公众号「AI 工作台」",
+    "role03Desc": "每日 AI 资讯自动化 + 手动创作；小红书工具与工作流分享；用开发者听得懂的语言讲清楚。",
+    "tl1Year": "2020 — 2022",
+    "tl1Org": "滴滴",
+    "tl1Role": "技术负责人",
+    "tl1Desc": "系统从 0 到 1 重构",
+    "tl2Year": "2018 — 2020",
+    "tl2Org": "OKX (OKEX)",
+    "tl2Role": "交易网关架构",
+    "tl2Desc": "高并发撮合 / 行情网关",
+    "tl3Year": "2015 — 2018",
+    "tl3Org": "搜狐",
+    "tl3Role": "智能客服系统",
+    "tl3Desc": "从 0 到 1 构建"
+  },
+  "projects": {
+    "label": "Projects",
+    "headingA": "在做的",
+    "headingHighlight": "东西",
+    "headingB": "。",
+    "lede": "独立开发的小工具与方法论，覆盖 macOS、Web、AI 工作流。",
+    "visPublic": "Public",
+    "visPrivate": "Private",
+    "viewOnGithub": "View on GitHub →",
+    "privateRepo": "Private repository",
+    "energyDayDesc": "每日精力管理工具，AI 辅助复盘。把「今天感觉怎样」变成可追踪的数据。",
+    "landrDesc": "Landing page builder。把「做一个能上线的着陆页」压缩到一杯咖啡的时间。",
+    "clipShotDesc": "macOS 菜单栏小工具，剪贴板图片自动上传到 OSS 并生成 Markdown 链接。",
+    "speakDeckDesc": "Claude Code 驱动的演讲工作流，HTML 幻灯片 + 本人声音口播全自动生成。"
+  },
+  "writing": {
+    "label": "Writing",
+    "headingA": "最近",
+    "headingHighlight": "在想什么",
+    "headingB": "。",
+    "lede": "来自公众号「AI 工作台」与小红书，每日自动同步。",
+    "empty": "最近暂无更新",
+    "sourceWechat": "公众号",
+    "sourceXhs": "小红书"
+  },
+  "contact": {
+    "label": "Contact",
+    "headingA": "有想聊的？",
+    "headingHighlight": "写信吧",
+    "headingB": "。",
+    "lede": "合作、咨询、课程问题都欢迎，回复一般在 24 小时内。"
+  },
+  "footer": {
+    "copyright": "© 2026 Leon · Built with Claude Code"
+  }
+}
